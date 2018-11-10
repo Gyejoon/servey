@@ -1,0 +1,7 @@
+# mysql.cnf
+[client]
+
+database = servey
+host = localhost
+user = root
+password = kit0416

@@ -1,9 +1,10 @@
 from django.db import models
+import bcrypt
 
 
 class AdminAduitModel(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
+    modified = models.DateTimeField(auto_now=True, null=True)
 
     class Meta:
         abstract = True
@@ -13,19 +14,23 @@ class Admin(AdminAduitModel):
     name = models.CharField(max_length=50)
     admin_id = models.CharField(max_length=30)
     password = models.CharField(max_length=256)
-    salt = models.CharField(max_length=128)
 
-    def gen_salt(self):
-        self.salt = 'abcqwe'
+    def __str__(self):
+        return self.name + self.admin_id
 
-    def gen_hash(self, password):
-        self.password = password
+    def hashpw(self, password): 
+        self.password = bcrypt.hashpw(password.encode('ascii'), bcrypt.gensalt())
+
+    def checkpw(self, password):
+        return bcrypt.checkpw(password.encode('ascii'), self.password)
+
+
 
 """ 설문조사 """
 class Servey(AdminAduitModel):
     name = models.CharField(max_length=50)
 
-    
+
 """ 설문조사 참여자 정보 """
 class ServeyPublication(models.Model):
     # 설문조사 FK
@@ -43,22 +48,19 @@ class ServeyQuestion(AdminAduitModel):
     # 설문조사 질문명
     name = models.CharField(max_length=100)
     # 설문조사 답변 타입
-    YES_OR_NO = 'YN'
-    SINGLE = 'SI'
-    MULTIPLE = 'MU'
     TYPE_CHOICES = (
-        (YES_OR_NO, 'YesorNo'),
-        (SINGLE, 'Single'),
-        (MULTIPLE, 'Mutiple')
+        ('YN', 'YesorNo'),
+        ('SI', 'Single'),
+        ('MU', 'Mutiple')
     )
     type = models.CharField(max_length=2,
-                            choices=TYPE_CHOICES,
-                            default=YES_OR_NO)
+                            choices=TYPE_CHOICES)
     # 설문조사 질문 순서
     order = models.IntegerField()
 
     def set_order(self):
         self.order = self.order + 1
+
 
 """ 설문조사 질문의 답변 항목 """
 class ServeyQuestionAnswerItem(models.Model):

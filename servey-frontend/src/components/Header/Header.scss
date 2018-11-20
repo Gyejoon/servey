@@ -1,0 +1,21 @@
+.header {
+  .header-wrapper {
+    background-color: #24292e;
+    color: hsla(0, 0%, 100%, 0.75);
+    padding-top: 1rem;
+    padding-left: 12px;
+    padding-bottom: 12px;
+    height: 2rem;
+    z-index: 32;
+    display: block;
+
+    .brand {
+      font-size: 2.25rem;
+      font-family: 'Inconsolata', monospace;
+      font-weight: 700;
+    }
+    .right {
+      margin-left: auto;
+    }
+  }
+}

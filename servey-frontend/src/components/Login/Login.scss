@@ -1,0 +1,18 @@
+body {
+    background-color: moccasin;
+}
+
+.login {
+    width: 500px;
+    position: absolute;
+    top: 25%;
+    left: 35%;
+
+    .login-header {
+        text-align: center;
+    }
+
+    .login-bottom {
+        text-align: center;
+    }
+}

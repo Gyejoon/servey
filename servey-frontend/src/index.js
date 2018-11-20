@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import Root from './Root';
+import './index.scss';
 import './styles/main.scss';
 
 const render = window.__REDUX_STATE__ ? ReactDOM.hydrate : ReactDOM.render;

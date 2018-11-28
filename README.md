@@ -5,9 +5,7 @@
 #### Backend
 
   - Python 3.7
-  - Django
-  - Docker
-  - Nginx
+  - Django, DjangoRest
   - MySQL
 
 #### Frontend

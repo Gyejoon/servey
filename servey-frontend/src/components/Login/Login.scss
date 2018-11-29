@@ -3,10 +3,13 @@ body {
 }
 
 .login {
-    width: 500px;
+    width: 400px;
     position: absolute;
-    top: 25%;
-    left: 35%;
+    margin: auto;
+    top: 30%;
+    left: 0;
+    right: 0;
+
 
     .login-header {
         text-align: center;

@@ -3,13 +3,11 @@
 ## Project Stacks
 
 ### Backend
-
   - Node.js
   - Koa + TypeORM
   - PostgreSQL
 
 ### Frontend
-
   - React
   - Mobx
   - React Router
@@ -26,7 +24,7 @@
 
 ## 개발용 서버 실행
 ```
-$ docker-compose up -d mysql-server
+$ docker-compose up -d postgres-server
 $ docker-compose run shell
     # yarn install
     # exit

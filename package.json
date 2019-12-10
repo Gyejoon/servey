@@ -1,5 +1,5 @@
 {
-    "name": "prgms-daangn",
+    "name": "servey",
     "version": "1.0.0",
     "main": "index.js",
     "private": true,
@@ -19,6 +19,7 @@
     "license": "MIT",
     "workspaces": [
       "server",
-      "client"
+      "client",
+      "shared"
     ]
   }

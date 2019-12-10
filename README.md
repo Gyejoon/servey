@@ -1,20 +1,35 @@
-## Servey Project
+# Servey Project
 
-### Development Environment
+## Project Stacks
 
-#### Backend
+### Backend
 
-  - Python 3.7
-  - Django, DjangoRest
-  - MySQL
+  - Node.js
+  - Koa + TypeORM
+  - PostgreSQL
 
-#### Frontend
+### Frontend
 
   - React
-  - React-Redux, Redux-Thunk
+  - Mobx
   - React Router
   - Axios
-  - Material-UI
-  - Flow
-  - Sass
-  
+  - Styled Components
+  - Parcel
+
+### Shared
+  - Test Tool: Jest
+  - Language: Typescript
+  - I/O Model : shared directory
+  - Environment: Docker
+
+
+## 개발용 서버 실행
+```
+$ docker-compose up -d mysql-server
+$ docker-compose run shell
+    # yarn install
+    # exit
+$ docker-compose up -d server
+```
+

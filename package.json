@@ -11,7 +11,7 @@
       "client:lint": "yarn workspace client lint",
       "client:watch": "yarn workspace client watch",
       "client:build": "yarn workspace client build",
-      "client:dev": "yarn workspace client dev",
+      "client:dev": "yarn workspace client start:dev",
       "server:build": "yarn workspace server build",
       "server:test": "yarn workspace server test",
       "server:test:mocha": "yarn workspace server test:mocha"

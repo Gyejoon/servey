@@ -2,7 +2,10 @@ import * as path from 'path';
 import * as express from 'express';
 import * as http from 'http';
 import * as cors from 'cors';
+import { createConnection } from 'typeorm';
+import routes from './routes';
 import logger from './logger';
+import config from './config';
 
 const stopServer = async (server: http.Server, signal?: string) => {
   logger.info(`Stopping server with signal: ${signal}`);
@@ -16,6 +19,7 @@ async function runServer() {
   app.use(express.json());
   app.use(cors());
   app.use(express.static(path.join(__dirname, 'public')));
+  app.use('', routes);
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
   });
@@ -23,6 +27,13 @@ async function runServer() {
   const server = app.listen(5000, () => {
     logger.info('Example app listening on port 5000!');
   });
+
+  try {
+    await createConnection(config.db);
+    console.log('Postgres RDBMS connection is established');
+  } catch (e) {
+    stopServer(server, e);
+  }
 }
 
 runServer()

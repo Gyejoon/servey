@@ -1,13 +1,19 @@
 import * as express from 'express';
 import apiRouter from './api';
 import { authRequired } from '@/lib/middlewares/auth';
+import hash from '@/lib/hash';
 
 const router = express.Router();
 
 router.use('/api', apiRouter);
-router.use('/test', authRequired, (req, res) => {
+router.get('/auth-test', authRequired, (req, res) => {
   res.json({
-    msg: 'hello world',
+    userId: req.app.get('userId'),
+  });
+});
+router.get('/test', (req, res) => {
+  res.json({
+    msg: hash('admin1234'),
   });
 });
 

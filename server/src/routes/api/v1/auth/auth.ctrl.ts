@@ -1,9 +1,12 @@
 import { Response, Request } from 'express';
 import * as Joi from 'joi';
+import * as jwt from 'jwt-simple';
 import { validateBody } from '@/lib/utils';
 import { getRepository } from 'typeorm';
+import { LoginRequest } from 'shared/model/auth';
 import User from '@/entity/User';
 import hash from '@/lib/hash';
+import config from '@/config';
 
 export default {
   login: async (req: Request, res: Response) => {
@@ -20,12 +23,7 @@ export default {
 
     if (!validateBody(req, res, schmea)) return;
 
-    type RequestBody = {
-      username: string;
-      password: string;
-    };
-
-    const { username, password } = req.body as RequestBody;
+    const { username, password } = req.body as LoginRequest;
 
     const userRepo = getRepository(User);
 
@@ -47,8 +45,19 @@ export default {
       });
     }
 
+    const exp = Date.now() / 1000;
+
+    const token = jwt.encode(
+      {
+        userId: user.id,
+        exp: Number(exp.toFixed()) + (3600 * 24),
+      },
+      config.auth.key,
+      'HS256',
+    );
+
     return res.json({
-      accessToken: 'test',
+      accessToken: token,
     });
   },
 };

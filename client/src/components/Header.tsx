@@ -32,7 +32,7 @@ const Header: React.SFC<HeaderProps> = props => {
       <HeaderTitle>설문조사 관리자</HeaderTitle>
       {username && (
         <HeaderRight>
-          {username}님 안녕하세요. <Link to="/logout"> 로그아웃</Link>
+          {username}님 안녕하세요. <Link to="/login"> 로그아웃</Link>
         </HeaderRight>
       )}
     </HeaderBlock>

@@ -1,8 +1,9 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { Button, Form, Input, Icon } from 'antd';
-
-interface LoginProps {}
+import useStores from '~helpers/useStores';
+import { RouteComponentProps } from 'react-router';
+import { useObserver } from 'mobx-react';
 
 const LoginBlock = styled.div`
   width: 100%;
@@ -38,10 +39,28 @@ const LoginBlock = styled.div`
   }
 `;
 
-const Login: React.SFC<LoginProps> = () => {
-  const handleSubmit = (e: FormEvent) => {
+interface LoginProps {}
+
+const Login: React.SFC<LoginProps & RouteComponentProps> = props => {
+  const { authStore } = useStores();
+  useObserver(() => {
+    authStore.username, authStore.password;
+  });
+  const { history } = props;
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    await authStore.login();
+    history.push('/');
+  };
+
+  const changeUsername = (e: ChangeEvent<HTMLInputElement>) => {
+    authStore.setUsername(e.target.value);
+  };
+
+  const changePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    authStore.setPassword(e.target.value);
   };
 
   return (
@@ -51,12 +70,16 @@ const Login: React.SFC<LoginProps> = () => {
         <Form onSubmit={handleSubmit}>
           <Form.Item>
             <Input
+              value={authStore.username}
+              onChange={changeUsername}
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
               placeholder="아이디"
             />
           </Form.Item>
           <Form.Item>
             <Input
+              value={authStore.password}
+              onChange={changePassword}
               prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
               type="password"
               placeholder="비밀번호"

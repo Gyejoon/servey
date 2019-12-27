@@ -8,7 +8,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <PrivateRoute path="/" component={Home} exact redirectTo="/login" />
+        <PrivateRoute path="/" component={Home} redirectTo="/login" />
         <Route path="/login" component={Login} />
       </Switch>
     </BrowserRouter>

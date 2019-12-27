@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon } from 'antd';
+import { Icon, Tooltip } from 'antd';
 
 const HeaderBlock = styled.div`
   display: flex;
@@ -35,7 +35,10 @@ const Header: React.SFC<HeaderProps> = props => {
       <HeaderTitle>설문조사 관리</HeaderTitle>
       {name && (
         <HeaderRight>
-          {name}님 안녕하세요. <Icon type="logout" onClick={logout} />
+          {name}님 안녕하세요.
+          <Tooltip title="로그아웃" placement="topLeft">
+            <Icon type="logout" onClick={logout} />
+          </Tooltip>
         </HeaderRight>
       )}
     </HeaderBlock>

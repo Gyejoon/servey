@@ -50,7 +50,7 @@ export default {
     const token = jwt.encode(
       {
         userId: user.id,
-        exp: Number(exp.toFixed()) + (3600 * 24),
+        exp: Number(exp.toFixed()) + 3600 * 24,
       },
       config.auth.key,
       'HS256',
@@ -59,5 +59,30 @@ export default {
     return res.json({
       accessToken: token,
     });
+  },
+  currentUser: async (req: Request, res: Response) => {
+    const userId = req.app.get('userId');
+
+    if (!userId) {
+      res.status(403);
+      return res.json({
+        msg: '비정상적인 접근입니다.',
+      });
+    }
+
+    const userRepo = getRepository(User);
+
+    const user = await userRepo.findOne(userId, {
+      select: ['id', 'name', 'username'],
+    });
+
+    if (!user) {
+      res.status(404);
+      return res.json({
+        msg: '사용자 정보가 존재하지 않습니다.',
+      });
+    }
+
+    return res.json(user);
   },
 };

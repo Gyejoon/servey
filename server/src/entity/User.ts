@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, Index } from 'typeorm';
 
 @Entity({
   name: 'users',
@@ -11,6 +11,10 @@ export default class User {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
+  @Column({ default: '' })
+  name!: string;
+
+  @Index()
   @Column()
   username!: string;
 

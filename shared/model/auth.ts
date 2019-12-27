@@ -1,10 +1,14 @@
 export type LoginRequest = {
-    username: string;
-    password: string;
-}
+  username: string;
+  password: string;
+};
+
+export type AuthenticationResponse = {
+  accessToken: string;
+};
 
 export interface User {
-    id: number;
-    username: string;
-    token: string;
+  id: string;
+  name: string;
+  username: string;
 }

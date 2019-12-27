@@ -1,8 +1,11 @@
 import apiClient from './apiClient';
-import { LoginRequest, User } from 'shared/model/auth';
+import { LoginRequest, AuthenticationResponse, User } from 'shared/model/auth';
 
 export default {
   login: (request: LoginRequest) => {
-    return apiClient.post<User>('/v1/auth/login', request);
+    return apiClient.post<AuthenticationResponse>('/v1/auth/login', request);
+  },
+  me: () => {
+    return apiClient.get<User>('/v1/auth/me');
   },
 };

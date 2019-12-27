@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Icon } from 'antd';
 
 const HeaderBlock = styled.div`
   display: flex;
@@ -19,20 +19,23 @@ const HeaderTitle = styled.span`
 const HeaderRight = styled.span`
   padding-right: 16px;
   font-size: 16px;
+  span {
+  }
 `;
 
 interface HeaderProps {
-  username?: string;
+  name?: string;
+  logout: () => void;
 }
 
 const Header: React.SFC<HeaderProps> = props => {
-  const { username } = props;
+  const { name, logout } = props;
   return (
     <HeaderBlock>
-      <HeaderTitle>설문조사 관리자</HeaderTitle>
-      {username && (
+      <HeaderTitle>설문조사 관리</HeaderTitle>
+      {name && (
         <HeaderRight>
-          {username}님 안녕하세요. <Link to="/login"> 로그아웃</Link>
+          {name}님 안녕하세요. <Icon type="logout" onClick={logout} />
         </HeaderRight>
       )}
     </HeaderBlock>

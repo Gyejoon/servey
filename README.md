@@ -4,7 +4,7 @@
 
 ### Backend
   - Node.js
-  - Koa + TypeORM
+  - Express + TypeORM
   - PostgreSQL
 
 ### Frontend

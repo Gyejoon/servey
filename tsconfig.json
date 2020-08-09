@@ -10,6 +10,8 @@
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "removeComments": false,
@@ -19,6 +21,9 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "importHelpers": true,
+    "types": ["node"],
+    "typeRoots": ["../node_modules/@types"],
     "baseUrl": "."
   },
   "exclude": ["node_modules"],
